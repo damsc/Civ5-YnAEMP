@@ -30,8 +30,8 @@ function UpdateNaturalWonderName()
 	print("-------------------------------")
 end
 
-function YnaemRemoveCiv (iPlayer)
-	local player = Players[iPlayer]
+function YnaemRemoveCiv (playerID)
+	local player = Players[playerID]
 	-- kill all units
 	for v in player:Units() do
 		v:Kill()
@@ -55,22 +55,22 @@ function GetPlayerBy (key, value)
 end
 
 function FinalizeCityState(numMinorCivs)
-	-- tab for iPlayer
+	-- tab for playerID
 	local ynaemSelection = {}
-	for iPlayer = GameDefines.MAX_MAJOR_CIVS, GameDefines.MAX_CIV_PLAYERS - 1 do
-		local player = Players[iPlayer]
+	for playerID = GameDefines.MAX_MAJOR_CIVS, GameDefines.MAX_CIV_PLAYERS - 1 do
+		local player = Players[playerID]
 		local minorCivID = player:GetMinorCivType()
 		-- Does this civ exist ?
 		if minorCivID ~= -1 then
 			-- keep only TSL ?
 			if (not MinorCivHasTSL(minorCivID) and PreGame.GetMapOption(MINOR_PLACEMENT) == MINOR_TSL_ONLY) then
-				YnaemRemoveCiv (iPlayer)
+				YnaemRemoveCiv (playerID)
 			-- was marked for removing ?
 			elseif string.find(modUserData.GetValue("ToRemove"), "minor"..minorCivID.."tr") then
-				YnaemRemoveCiv (iPlayer)
+				YnaemRemoveCiv (playerID)
 				print ("kill marked civ : " .. minorCivID)
 			else
-				table.insert(ynaemSelection, iPlayer)
+				table.insert(ynaemSelection, playerID)
 			end
 		end
 	end

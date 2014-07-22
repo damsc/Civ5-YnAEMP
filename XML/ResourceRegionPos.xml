@@ -1543,4 +1543,44 @@
 	<Resource_GreatestEarthGisementPosition>
 
 	</Resource_GreatestEarthGisementPosition>
+	<!-- +++++++++++++++++++++++ -->
+	<!-- Europe Giant Regions -->
+	<!-- +++++++++++++++++++++++ -->
+	<Resource_EuroGiantRegionPosition>
+		<Row>
+			<Type>NORTH_EUROPE</Type>
+			<X>0</X>
+			<Y>59</Y>
+			<Width>166</Width>
+			<Height>58</Height>
+		</Row>
+		<Row>
+			<Type>SOUTH_EUROPE</Type>
+			<X>0</X>
+			<Y>11</Y>
+			<Width>109</Width>
+			<Height>47</Height>
+		</Row>
+		<Row>
+			<Type>MIDDLE_EAST</Type>
+			<X>130</X>
+			<Y>0</Y>
+			<Width>35</Width>
+			<Height>10</Height>
+		</Row>
+		<Row>
+			<Type>AFRICA</Type>
+			<X>0</X>
+			<Y>0</Y>
+			<Width>129</Width>
+			<Height>10</Height>
+		</Row>
+		<Row>
+			<Type>BLACK_SEA</Type>
+			<X>110</X>
+			<Y>11</Y>
+			<Width>55</Width>
+			<Height>47</Height>
+		</Row>
+	</Resource_EuroGiantRegionPosition>
 </GameData>

@@ -65,6 +65,7 @@ STANDARD_EASTERN_MEDITERRANEAN = 7
 LARGE_EASTERN_MEDITERRANEAN = 8
 LARGE_GREATEST_EARTH = 9
 STANDARD_AMERICA = 10
+GIANT_EUROPE = 11
 
 -- List of available maps
 -- todo: ID as index
@@ -91,6 +92,7 @@ else
 		[LARGE_EASTERN_MEDITERRANEAN] = { ID = LARGE_EASTERN_MEDITERRANEAN, File = "Eastern_Mediterranean_Large_blank.Civ5Map", Name = "Large Eastern Mediterranean", Description = "110x55 large Eastern Mediterranean for Ambrox62's AMC", Size = "WORLDSIZE_LARGE", Civs = 14, Minors = 22, TablePrefix = "AmcEastMedLarge" },
 		[LARGE_GREATEST_EARTH] = { ID = LARGE_GREATEST_EARTH, File = "GreatestEarthMap.Civ5Map", Name = "Large Earth", Description = "104x64 Large Earth by djvandyke, with massively rescaled regions for better Gameplay", Size = "WORLDSIZE_LARGE", Civs = 22, Minors = 16, TablePrefix = "GreatestEarth" },
 		--[STANDARD_AMERICA] = { ID = STANDARD_AMERICA, File = "ANACMap_blank.Civ5Map", Name = "Standard America", Description = "69x69 standard America for Optik's ANAC", Size = "WORLDSIZE_STANDARD", Civs = 8, Minors = 12, TablePrefix = "AmericaStandard" },
+		[GIANT_EUROPE] = { ID = GIANT_EUROPE, File = "Europe_Giant_blank.Civ5Map", Name = "Giant Europe", Description = "166x118 giant Europe by Damasc", Size = "WORLDSIZE_HUGE", Civs = 18, Minors = 24, TablePrefix = "EuroGiant" },
 	}
 end
 
@@ -103,6 +105,7 @@ g_BosphorusPlot = {
 	[STANDARD_CORDIFORM_EARTH] = {x=45, y=24, replX=45, replY=23, riverX=44, riverY=24, position = "W"},
 	[LARGE_EUROPE] = {x=53, y=31, replX=54, replY=31, riverX=53, riverY=31, position = "W-NW"},
 	[LARGE_GREATEST_EARTH] = {x=58, y=45, replX=59, replY=45, riverX=57, riverY=45, position = "W"},
+	[GIANT_EUROPE] = {x=110, y=34, replX=110, replY=33, riverX=110, riverY=34, position = "W-NW"},
 }
 
 -- Natural Wonder renaming
@@ -173,6 +176,19 @@ g_NaturalWonderName = {
 		},
 	[LARGE_GREATEST_EARTH] = {},
 	[STANDARD_AMERICA] = {},
+	[GIANT_EUROPE] = { 
+		TXT_KEY_FEATURE_VOLCANO = "Santorini", 
+		TXT_KEY_FEATURE_REEF = "The Sula Reef", 
+		TXT_KEY_FEATURE_GEYSER = "The Great Geysir", 
+		TXT_KEY_FEATURE_CRATER = "Tin Bider crater", 
+		TXT_KEY_FEATURE_POTOSI = "The Great Copper Mountain", 
+		TXT_KEY_FEATURE_MT_FUJI = "Mt. Etna", 
+		TXT_KEY_FEATURE_MT_KAILASH = "Mont Blanc",
+		TXT_KEY_FEATURE_MESA = "Siligo Mesa",
+		TXT_KEY_FEATURE_SRI_PADA = "Kirkjufell",
+		TXT_KEY_FEATURE_LAKE_VICTORIA = "Lake Ladoga",
+		TXT_KEY_FEATURE_KILIMANJARO = "Mt. Elbrus"
+		},
 }
 
 
@@ -735,6 +751,48 @@ g_MapPulldownOptions = {
 	},
 },
 ---------------
+[GIANT_EUROPE] = {
+	[MINOR_PLACEMENT] = {
+		ID = MINOR_PLACEMENT,
+		Name = "CS Placement",
+		ToolTip = "Placement for City States",
+		Disabled = false,
+		DefaultValue = 1,
+		SortPriority = 2,
+		Values = MinorPlacementValues -- mod dependency for these values, see the MOD Dependency section above
+	},
+	[MINOR_DISTANCE] = {
+			ID = MINOR_DISTANCE,
+			Name = "CS Separation",
+			ToolTip = "City States minimum separation distance: a city that starts under the minimum distance will be removed from the game",
+			Disabled = false,
+			DefaultValue = 3,
+			SortPriority = 2,
+			Values = { 
+				{ Name	= "Don't check", ToolTip = "Allow City States starting positions to overlap. Not recommanded", Value = MINOR_DISTANCE_NO,},
+				{ Name	= "Minimum", ToolTip = "3 tiles", Value = MINOR_DISTANCE_MINI,},
+				{ Name	= "Close", ToolTip = "~ 5 tiles", Value = MINOR_DISTANCE_CLOSE,},
+				{ Name	= "Medium", ToolTip = "~ 7 tiles", Value = MINOR_DISTANCE_MEDIUM,},
+				{ Name	= "Away", ToolTip = "~ 9 tiles", Value = MINOR_DISTANCE_AWAY,},
+			},
+	},
+	[RESOURCE_QUANTITY] = {
+			ID = RESOURCE_QUANTITY,
+			Name = "Resources",
+			ToolTip = "Resources quantity",
+			Disabled = false,
+			DefaultValue = 3,
+			SortPriority = 3,
+			Values = { 
+				{ Name	= "Poor", ToolTip = "Resources are extremly rare", Value = RESOURCE_POOR,},
+				{ Name	= "Sparse", ToolTip = "Less resources", Value = RESOURCE_SPARSE,},
+				{ Name	= "Standard", ToolTip = "Standard value", Value = RESOURCE_STANDARD,},
+				{ Name	= "Abundant", ToolTip = "More resources", Value = RESOURCE_ABUNDANT,},
+				{ Name	= "Riche", ToolTip = "I've said : Give me more resources !!!", Value = RESOURCE_RICHE,},
+			},
+	},
+},
+---------------
 }
 ---------------
 ---------------
@@ -1072,6 +1130,38 @@ g_MapCheckboxOptions = {
 		ID = RESOURCE_DEPOSIT,
 		Name = "Add specific resources in regions",
 		ToolTip = "Place requested resources in regions (force minimal placement in a region)",
+		Disabled = false,
+		GameOption = false,
+		SortPriority = 1,
+	},	{
+		ID = RESOURCE_SCALE,
+		Name = "Don't scale resources with players",
+		ToolTip = "The number of resources won't be scaled depending of the number of players",
+		Disabled = false,
+		GameOption = false,
+		SortPriority = 2,
+	},	{
+		ID = RESOURCE_REQUESTED,
+		Name = "Add specific resources at starting positions",
+		ToolTip = "Place historic resources for each civilization",
+		Disabled = false,
+		GameOption = false,
+		SortPriority = 2,
+	},
+},
+----------------
+[GIANT_EUROPE] = {
+	{
+		ID = BOSPHORUS,
+		Name = "Bosphorus Strait is a sea",
+		ToolTip = "If checked, will use a sea tile for Bosphorus, else it will be a river",
+		Disabled = false,
+		GameOption = false,
+		SortPriority = 0,
+	},	{
+		ID = RESOURCE_GEO,
+		Name = "Use true geographic resource placement",
+		ToolTip = "Force resources to be placed in the correct geographic region",
 		Disabled = false,
 		GameOption = false,
 		SortPriority = 1,

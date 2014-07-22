@@ -36,7 +36,7 @@ g_GameOptionsManager = InstanceManager:new("GameOptionInstance", "GameOptionRoot
 g_DropDownOptionsManager = InstanceManager:new("DropDownOptionInstance", "DropDownOptionRoot", Controls.DropDownOptionsStack);
 g_VictoryCondtionsManager = InstanceManager:new("GameOptionInstance", "GameOptionRoot", Controls.VictoryConditionsStack);
 
-g_Hotseat = {} -- Human slots, indexed on iPlayer
+g_Hotseat = {} -- Human slots, indexed on playerID
 
 -------------------------------------------------
 -- Ynaem
@@ -479,14 +479,14 @@ ScreenOptions = {
 			return civs;
 		end
 	
-		function PopulateCivPulldown( playableCivs, pullDown, iPlayer )
+		function PopulateCivPulldown( playableCivs, pullDown, playerID )
 			-- clear previous entry (could change from map selection)
 			pullDown:ClearEntries();
 
 			-- set up the random slot
 			local controlTable = {};
 			pullDown:BuildEntry( "InstanceOne", controlTable );
-			controlTable.Button:SetVoids( iPlayer, -1 );
+			controlTable.Button:SetVoids( playerID, -1 );
 			controlTable.Button:LocalizeAndSetText("TXT_KEY_RANDOM_LEADER");
 			controlTable.Button:LocalizeAndSetToolTip("TXT_KEY_RANDOM_LEADER_HELP");
 	
@@ -494,16 +494,16 @@ ScreenOptions = {
 				local controlTable = {};
 				pullDown:BuildEntry( "InstanceOne", controlTable );
 
-				controlTable.Button:SetVoids( iPlayer, id );
+				controlTable.Button:SetVoids( playerID, id );
 				controlTable.Button:LocalizeAndSetText("TXT_KEY_RANDOM_LEADER_CIV", Locale.ConvertTextKey(civ.LeaderDescription), Locale.ConvertTextKey(civ.ShortDescription));
 				controlTable.Button:LocalizeAndSetToolTip(civ.Description);
 			end    
 		    
 			pullDown:CalculateInternals();
-			pullDown:RegisterSelectionCallback(function(iPlayer, id)
+			pullDown:RegisterSelectionCallback(function(playerID, id)
 				local civID = playableCivs[id] and playableCivs[id].CivID or -1;
 			
-				PreGame.SetCivilization( iPlayer, civID);
+				PreGame.SetCivilization( playerID, civID);
 				PerformPartialSync();
 			end);
 		end
@@ -816,7 +816,7 @@ ScreenOptions = {
 ----------------------------------------------------------------
 ["Teams"] = {
 	FullSync = function()
-		function PopulateTeamPulldown( pullDown, iPlayer )
+		function PopulateTeamPulldown( pullDown, playerID )
 			local count = 0;
 
 			pullDown:ClearEntries();
@@ -826,7 +826,7 @@ ScreenOptions = {
 			pullDown:BuildEntry( "InstanceOne", controlTable );
 			
 			controlTable.Button:LocalizeAndSetText("TXT_KEY_MULTIPLAYER_DEFAULT_TEAM_NAME", 1);
-			controlTable.Button:SetVoids( iPlayer, 0 );
+			controlTable.Button:SetVoids( playerID, 0 );
 			
 			for i = 1, GameDefines.MAX_MAJOR_CIVS-1, 1 do
 				if( PreGame.GetSlotStatus( i ) == SlotStatus.SS_COMPUTER ) then
@@ -834,28 +834,28 @@ ScreenOptions = {
 					pullDown:BuildEntry( "InstanceOne", controlTable );
 					
 					controlTable.Button:LocalizeAndSetText("TXT_KEY_MULTIPLAYER_DEFAULT_TEAM_NAME", i + 1);
-					controlTable.Button:SetVoids( iPlayer, i );
+					controlTable.Button:SetVoids( playerID, i );
 				end
 			end    
 
 			pullDown:CalculateInternals();
-			pullDown:RegisterSelectionCallback(function(iPlayer, playerChoiceID)
+			pullDown:RegisterSelectionCallback(function(playerID, playerChoiceID)
 				
-				PreGame.SetTeam(iPlayer, playerChoiceID);
-				local slotInstance = g_SlotInstances[iPlayer];
+				PreGame.SetTeam(playerID, playerChoiceID);
+				local slotInstance = g_SlotInstances[playerID];
 				
 				if( slotInstance ~= nil ) then
-					slotInstance.TeamLabel:LocalizeAndSetText( "TXT_KEY_MULTIPLAYER_DEFAULT_TEAM_NAME", PreGame.GetTeam(iPlayer) + 1 );
+					slotInstance.TeamLabel:LocalizeAndSetText( "TXT_KEY_MULTIPLAYER_DEFAULT_TEAM_NAME", PreGame.GetTeam(playerID) + 1 );
 				else
-					Controls.TeamLabel:LocalizeAndSetText( "TXT_KEY_MULTIPLAYER_DEFAULT_TEAM_NAME", PreGame.GetTeam(iPlayer) + 1 );
+					Controls.TeamLabel:LocalizeAndSetText( "TXT_KEY_MULTIPLAYER_DEFAULT_TEAM_NAME", PreGame.GetTeam(playerID) + 1 );
 				end
 				
 				PerformValidation();
 			end);
 			
 			
-			local team = PreGame.GetTeam(iPlayer);
-			local slotInstance = g_SlotInstances[iPlayer];
+			local team = PreGame.GetTeam(playerID);
+			local slotInstance = g_SlotInstances[playerID];
 			
 			if( slotInstance ~= nil ) then
 				slotInstance.TeamLabel:LocalizeAndSetText( "TXT_KEY_MULTIPLAYER_DEFAULT_TEAM_NAME", team + 1 );
@@ -899,7 +899,7 @@ ScreenOptions = {
 ----------------------------------------------------------------
 ["Hotseat"] = {
 	FullSync = function()
-		function PopulateHotseatPulldown( pullDown, iPlayer )
+		function PopulateHotseatPulldown( pullDown, playerID )
 			local count = 0;
 			
 			pullDown:ClearEntries();
@@ -908,21 +908,21 @@ ScreenOptions = {
 			local controlTable = {};
 			pullDown:BuildEntry( "InstanceOne", controlTable );			
 			controlTable.Button:LocalizeAndSetText("A.I.");
-			controlTable.Button:SetVoids( iPlayer, 0 );
+			controlTable.Button:SetVoids( playerID, 0 );
 			
 			pullDown:BuildEntry( "InstanceOne", controlTable );
 			controlTable.Button:LocalizeAndSetText("Human");
-			controlTable.Button:SetVoids( iPlayer, 1 );
+			controlTable.Button:SetVoids( playerID, 1 );
 
 
 			pullDown:CalculateInternals();
-			pullDown:RegisterSelectionCallback(function(iPlayer, playerChoiceID)
+			pullDown:RegisterSelectionCallback(function(playerID, playerChoiceID)
 				
-				g_Hotseat[iPlayer] = (playerChoiceID == 1) -- set iPlayer hotseat value to true if playerChoiceID = 1
+				g_Hotseat[playerID] = (playerChoiceID == 1) -- set playerID hotseat value to true if playerChoiceID = 1
 
-				local slotInstance = g_SlotInstances[iPlayer];
+				local slotInstance = g_SlotInstances[playerID];
 				
-				if g_Hotseat[iPlayer] then
+				if g_Hotseat[playerID] then
 					if( slotInstance ~= nil ) then
 						slotInstance.HotseatLabel:LocalizeAndSetText( "Human" );
 					else
@@ -940,9 +940,9 @@ ScreenOptions = {
 			end);
 						
 
-			local slotInstance = g_SlotInstances[iPlayer];
+			local slotInstance = g_SlotInstances[playerID];
 			
-			if g_Hotseat[iPlayer] then
+			if g_Hotseat[playerID] then
 				if( slotInstance ~= nil ) then
 					slotInstance.HotseatLabel:LocalizeAndSetText( "Human" );
 				else

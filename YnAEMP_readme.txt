@@ -32,7 +32,7 @@ Madeira, PseRamesses and everyone on the civfanatics thread for testing, comment
 mihaifx: City States Leaders mod
 Ekmek: CS TSL for the cordiform earth
 Montijin: TSL for BNW Civs on the Huge Earth Map
-Al-Iskander: TSL for all Civs and CS on djvandyke's standard sized Earth Map 
+Al-Iskander: TSL for BNW Civs and CS on djvandyke's standard sized Earth Map 
 
 
 	-- To do --
@@ -219,9 +219,9 @@ Compatibility: Civ5 vanilla, Gods+Kings, Brave New World and all DLC
 [b]Installation[/b]
 ==========================================================================
 
-1/ Click the 'subscribe' button and go back in game, in the mod section, it will be downloaded automatically.
+1/ Click the "subscribe" button and go back in game, in the mod section, it will be downloaded automatically.
 2/ Once downloaded, click the checkbox on the right of the mod line to enabled it.
-3/ After you've enabled all the mods you want to play with, click 'next'
+3/ After you've enabled all the mods you want to play with, click "next"
 4/ Choose SINGLE PLAYER and CUSTOM GAME to get the new setup menu. You must use the custom game menu.
 
 For Mac users, here's the direct download link on [url=http://forums.civfanatics.com/downloads.php?do=file&id=15875] Civfanatics File Database[/url]
@@ -235,12 +235,12 @@ If the mod is not downloaded automatically even after unsubscribing/restarting t
 - first, check your game files integrity, instruction to do so are on [url=https://support.steampowered.com/kb_article.php?ref=2037-QEUH-3335] Steam Support[/url]
 
 
-- second try to 'reset' the download:
+- second try to "reset" the download:
 
 1/ unsubscribe to the mod
 2/ close steam (not just the windows, the compete program, in doubt restart your computer)
-3/ delete all the content of the civ5 cache folder (\My Documents\My Games\Sid Meier's Civilization 5\cache)
-4/ go into your civ5 mods folder (\My Documents\My Games\Sid Meier's Civilization 5\MODS) and delete any file or folder named like this mod.
+3/ delete all the content of the civ5 cache folder ("\My Documents\My Games\Sid Meier's Civilization 5\cache")
+4/ go into your civ5 mods folder ("\My Documents\My Games\Sid Meier's Civilization 5\MODS") and delete any file or folder named "R.E.D. Modpack".
 5/ launch steam then civ5 and subscribe again from ingame.
 
 
@@ -252,16 +252,14 @@ If the mod is not downloaded automatically even after unsubscribing/restarting t
 
 - Huge Earth (120x80): Dale's huge map edited with Europe and Japan upscaled
 
-- Large Earth (104x64): djvandyke's 'Greatest Earth Map', with massively rescaled regions for better Gameplay
-
 - Standard Earth (82x50): a Werner projection Earth map by smellymummy
 
 - Large Europe (79x73): Dieter's Europe CiV map
 
-- A pack of Mediterranean maps made by Ambrox62's for his Ancient Mediteranean Civilizations mod. You can get AMC for Civ5 on [url=http://forums.civfanatics.com/showthread.php?t=416671] CivFanatics[/url] or G+K conversion on [url=http://steamcommunity.com/sharedfiles/filedetails/?id=92186405]Steam Workshop[/url]
+- A pack of Mediterranean maps made by Ambrox62's for his Ancient Mediteranean Civilizations mod. You can get AMC for Civ5 on [url=http://forums.civfanatics.com/showthread.php?t=416671] CivFanatics[/url] or G&K conversion on [url=http://steamcommunity.com/sharedfiles/filedetails/?id=92186405]Steam Workshop[/url]
 
 
 [b]More infos[/b]
 ==========================================================================
 
-See the first post on the thread on [url=http://http://forums.civfanatics.com/showthread.php?t=397387] CivFanatics[/url] for more details on available option and how to add TSL for custom civilization
+See the first post on the thread on [url=http://http://forums.civfanatics.com/showthread.php?t=397387] CivFanatics[/url] for more details on available option & how to add TSL for custom civilization
